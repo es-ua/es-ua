@@ -5,7 +5,7 @@
 
 
 - 🔭 I’m currently working on MAPKO crm 
-- 🌱 I’m currently learning Salesforce and React Native
+- 🌱 I’m currently learning ...
 - 👯 I’m looking to collaborate on ...
 - 🤔 I’m looking for help with Android devs
 - 💬 Ask me about CRM, iOS, project management
