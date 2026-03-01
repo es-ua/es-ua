@@ -94,12 +94,10 @@ n8n · LangChain · OpenAI API · Anthropic API · Claude MCP
 ---
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=es-ua&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" height="165" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=es-ua&layout=compact&theme=tokyonight&hide_border=true" height="165" />
-</p>
-
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=es-ua&theme=tokyonight&hide_border=true" />
+  <img src="https://img.shields.io/github/stars/es-ua?style=for-the-badge&color=f5a623&label=Total%20Stars" />
+  <img src="https://img.shields.io/badge/Repos-106-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Contributions-1.5k+-6366F1?style=for-the-badge" />
+  <img src="https://img.shields.io/github/followers/es-ua?style=for-the-badge&color=58a6ff&label=Followers" />
 </p>
 
 ---
