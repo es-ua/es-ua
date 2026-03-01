@@ -28,10 +28,18 @@ Based in Hamburg, Germany 🇩🇪 — working with European startups and scale-
       <p><code>Next.js</code> <code>PostgreSQL</code> <code>WebSocket</code> <code>React Native</code></p>
     </td>
     <td width="50%">
+      <h3>✈️ Skydex</h3>
+      <p>Pokédex for planes — spot aircraft in the sky, scan & collect them all. 20-rank progression system, rarity classifications, leaderboards, and 300+ aircraft models.</p>
+      <p><code>React Native</code> <code>Swift</code> <code>Firebase</code> <code>Gamification</code></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
       <h3>🔍 SERPOscan</h3>
       <p>AI-powered SEO audit tool — comprehensive technical analysis, performance scoring, and actionable recommendations.</p>
       <p><code>Node.js</code> <code>Lighthouse</code> <code>SEO</code></p>
     </td>
+    <td width="50%"></td>
   </tr>
 </table>
 
