@@ -270,28 +270,21 @@ vocabulary is deliberately not theirs alone.
 
 <table>
   <tr>
-    <td width="50%">
+    <td width="34%">
       <h3>🔗 <a href="https://y0.exchange">y0.exchange</a></h3>
       <p>Non-custodial crypto platform & MCP server — the AI interface layer for blockchain. Connect any wallet to AI agents without exposing private keys.</p>
       <p><a href="https://www.npmjs.com/package/@y0exchange/mcp"><code>@y0exchange/mcp</code></a> — 8 tools, 5 chains, dual transport (stdio + HTTP). Includes a <a href="https://github.com/y0exchange/mcp/tree/main/skill">Claude Skill</a> for guided DeFi workflows with smart slippage, gas optimization, and safety checks.</p>
       <p><code>TypeScript</code> <code>Web3</code> <code>MCP</code> <code>Claude Skill</code> <code>React</code></p>
     </td>
-    <td width="50%">
+    <td width="33%">
       <h3>📊 <a href="https://citenso.com">Citenso</a></h3>
       <p>AI Visibility Tracking — monitor how ChatGPT, Claude, Perplexity and other AI models recommend your brand vs competitors.</p>
       <p><code>Next.js</code> <code>Python</code> <code>AI/LLM</code> <code>SaaS</code></p>
     </td>
-  </tr>
-  <tr>
-    <td width="50%">
+    <td width="33%">
       <h3>🔍 SERPOscan</h3>
       <p>AI-powered SEO audit tool — comprehensive technical analysis, performance scoring, and actionable recommendations.</p>
       <p><code>Node.js</code> <code>Lighthouse</code> <code>SEO</code></p>
-    </td>
-    <td width="50%">
-      <h3>🗺️ <a href="https://mapko.net">Mapko</a> &amp; <a href="https://botkontor.com">Botkontor</a></h3>
-      <p>Community map, business pages and the AI agent that answers on them — full write-up above ↑</p>
-      <p><code>NestJS</code> <code>LangGraph</code> <code>Next.js</code> <code>React Native</code></p>
     </td>
   </tr>
 </table>
