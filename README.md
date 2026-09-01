@@ -46,6 +46,103 @@ replacement app.
 
 ---
 
+#### ✈️ [Skydex](https://skydex.online) — a flight sim where the traffic is real
+
+Open a browser tab and you are over the real Earth: real terrain, real
+photogrammetry where it exists, real weather for that city, real sunrise. The
+aircraft around you are not spawned — they are the ones actually in the air,
+decoded from ADS-B seconds ago. So are the ships below, from AIS.
+
+Three things run at the same time, and each one feeds the next:
+
+**Fly it.** Freestyle FPV drones and a gull, six-degree-of-freedom flight
+model, acro and angle modes, gamepad/RC transmitter support with a calibration
+wizard, and 19 hand-built race tracks with ghost replays and leaderboards.
+Also playable in VR on Quest through WebXR.
+
+**Collect it.** Every real aircraft you catch overhead becomes a card — six
+rarity tiers, fifteen ranks, monthly seasons, achievements, an inbox that
+remembers why you got what you got. Types, airlines and manufacturers get
+their own canonical pages, so a catch turns into a permanent, indexable page
+about a real machine. Around 1,800 public URLs at the moment; the game
+itself speaks five languages.
+
+**Feed it.** The aircraft data is ours: Skydex runs its own ADS-B aggregation
+network at [feed.skydex.online](https://feed.skydex.online/) — volunteers
+point a receiver at it, get a station page with uptime, range and the rarest
+aircraft they heard, and a badge in the game. Non-exclusive by design: keep
+feeding every other network at the same time. Getting a receiver onto it is a
+product of its own — see below.
+
+Around all of that: multiplayer with voice on real airband frequencies over a
+WebRTC mesh, user-run radio stations with their own studio, a flying-spots
+map built from OpenStreetMap, and a self-hosted observability stack — the
+whole thing lives on one small VPS and deploys itself from `master`.
+
+**Not the frozen one.** There is an older Skydex — a React Native "Pokédex for
+planes" I started in 2025 and put on ice. This is the rebuild: same idea, but
+the sky is a place you fly through rather than a list you scroll, and the data
+comes from a network we operate instead of someone's API quota.
+
+- 🌍 [`skydex.online`](https://skydex.online) — the game
+- 📡 [`feed.skydex.online`](https://feed.skydex.online/) — the feeder network
+  · [live coverage map](https://feed.skydex.online/tar1090/)
+  · [stations](https://skydex.online/stations)
+- 🖥 [`es-ua/skydex-feeder`](https://github.com/es-ua/skydex-feeder) — macOS
+  feeder app: releases, checksums and the GPL decoder sources we bundle
+  · [⬇ download](https://feed.skydex.online/download)
+- 📻 [`radio.skydex.online`](https://radio.skydex.online/) — community radio
+  stations · 🖼 [`gallery`](https://gallery.skydex.online/) · 📍
+  [`spots`](https://spots.skydex.online/) — real-world FPV flying spots
+- 🏁 [races](https://skydex.online/races) · ✈️
+  [aircraft types](https://skydex.online/aircraft-types) · 📰
+  [dev log](https://skydex.online/news/)
+
+`TypeScript` · `React` · `three.js` · `WebGL` · `WebXR` · `NestJS` · `MongoDB` · `Socket.IO` · `WebRTC` · `Next.js` · `Swift` · `Docker` · `nginx` · `Grafana`
+
+---
+
+#### 📡 [Skydex Feeder for macOS](https://feed.skydex.online/mac) — an SDR stick, two minutes, no Raspberry Pi
+
+Feeding ADS-B has always assumed a spare Raspberry Pi, an install script and a
+terminal, which is why most people who own an SDR stick have never fed anything
+with it. This is a native menu bar app instead: plug the stick into the Mac you
+already use, run a two-minute wizard, and it is a receiving station. The
+decoder is bundled — no Docker, no terminal, no second computer.
+
+Universal binary for Apple silicon and Intel, signed with a Developer ID and
+notarized, and it updates itself. Updates carry **our** signature on top of
+Apple's notarisation, because the two answer different questions: notarisation
+says the file came from us and is clean, the update signature says *this
+particular update* is the one we published — a swapped file is refused even
+when it is served from our own domain.
+
+**It is not a lock-in client.** Skydex sits in the same list of toggles as
+adsb.lol, airplanes.live, adsb.fi and ADSBExchange, with a field for anything
+else that takes a Beast stream — and it can be switched off while the others
+keep feeding. "Check my feed" asks the network itself what it is receiving from
+your station, because a connected socket only proves the app is talking.
+
+**Closed app, open decoder — on purpose.** The repository is the
+corresponding-source offer: the app bundles
+[readsb](https://github.com/wiedehopf/readsb) (GPL-3.0-or-later) statically
+linked with librtlsdr and libusb, and `scripts/build-readsb.sh` fetches the
+exact upstream sources and reproduces the universal binary we ship, carrying no
+patches of our own. Every release lists the version of every bundled component
+and the **SHA-256 of the DMG**, so a download from the site can be verified
+against what the repo declares.
+
+- 🖥 [`es-ua/skydex-feeder`](https://github.com/es-ua/skydex-feeder) — release
+  notes, checksums, decoder sources, issues
+- ⬇ [download](https://feed.skydex.online/download) — signed & notarized DMG,
+  macOS 13+ · [product page & FAQ](https://feed.skydex.online/mac)
+- 📡 [what it feeds](https://feed.skydex.online/) · [your station's
+  page](https://skydex.online/feed)
+
+`Swift` · `macOS` · `RTL-SDR` · `readsb` · `Sparkle` · `codesign` · `notarytool`
+
+---
+
 <table>
   <tr>
     <td width="50%">
@@ -67,18 +164,10 @@ replacement app.
       <p><code>Next.js</code> <code>PostgreSQL</code> <code>WebSocket</code> <code>React Native</code></p>
     </td>
     <td width="50%">
-      <h3>✈️ Skydex</h3>
-      <p>Pokédex for planes — spot aircraft in the sky, scan & collect them all. 20-rank progression system, rarity classifications, leaderboards, and 300+ aircraft models.</p>
-      <p><code>React Native</code> <code>Swift</code> <code>Firebase</code> <code>Gamification</code></p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
       <h3>🔍 SERPOscan</h3>
       <p>AI-powered SEO audit tool — comprehensive technical analysis, performance scoring, and actionable recommendations.</p>
       <p><code>Node.js</code> <code>Lighthouse</code> <code>SEO</code></p>
     </td>
-    <td width="50%"></td>
   </tr>
 </table>
 
