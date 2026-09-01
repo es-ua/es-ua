@@ -151,6 +151,123 @@ against what the repo declares.
 
 ---
 
+<a href="https://botkontor.com">
+  <img src="assets/botkontor.png" alt="Botkontor — botkontor.com" width="460">
+</a>
+
+#### The bot answers the customer, the CRM fills itself in
+
+A small business in Germany buys a chatbot and gets a widget. What it
+actually needed was the person behind the widget: someone who knows the
+opening hours, books the appointment, and writes down who called and what
+they wanted. Botkontor is that — one AI agent per business, and a customer
+database that is a **by-product of the conversations** instead of a second
+system nobody maintains.
+
+**The agent is a graph, not a prompt.** Every bot runs a LangGraph
+StateGraph — retrieval, routing, tool calls, verification, handover —
+started from a preset (triage, RAG support, lead capture, booking) and
+rewired per tenant. Its behaviour lives in **skills**: markdown modules in
+a folder tree with `@include` cross-references, so "what to do when
+someone cancels" is a file a human can read and diff, not a paragraph
+buried in a system prompt. Answers are grounded in the tenant's own
+documents through RAG over pgvector; tools that touch the real world can
+be put behind human approval. Mistral by default, OpenAI / Anthropic /
+Google on request.
+
+**The CRM writes itself.** Contacts, timeline entries and bookings are
+extracted from the conversation while it is still happening — calendar
+sync (Google / Outlook / Apple), email or SMS OTP when identity actually
+matters, and live handover that pushes the whole thread to a human on
+Telegram the second someone asks for one. Each business gets
+`{biz}.botkontor.com` — dashboard, a public chat page, and a widget that
+drops into an existing site with one `<script>` tag.
+
+**Configure it from the chat you are already in.** `mcp.botkontor.com` is
+a hosted MCP server: 27 tools across bots, engine, knowledge, skills and
+agent tools, so an admin can describe a bot to Claude Desktop or Cursor
+and have it created, fed and published without ever opening the dashboard.
+It is a stateless proxy that holds no secrets of its own — auth is a
+per-tenant `tnt_…` key supplied by the client, in memory for that session
+only.
+
+Everything runs on EU infrastructure. For a Handwerksbetrieb in Hamburg,
+GDPR is not a feature on a pricing page — it is the precondition for the
+conversation happening at all.
+
+**Mapko is the other half of the platform.** Same monorepo, same accounts
+and businesses: a map where a place gets found, communities and chats
+around it, public business pages at `{biz}.mapko.net`, and the CRM at
+`{biz}.mapko.app` — web plus a React Native app. Botkontor is what answers
+when someone taps *message*.
+
+**And the classification underneath is open.** Both halves have to agree on
+what a business *is*, so that layer was split out, licensed MIT and
+published as its own standard — see below ↓.
+
+- 🤖 [`botkontor.com`](https://botkontor.com) · [`botkontor.de`](https://botkontor.de) —
+  product, pricing, branch templates · 🔐 [`app.botkontor.com`](https://app.botkontor.com) — dashboard
+- 🧩 `mcp.botkontor.com` — hosted MCP server (SSE), 27 agent-management
+  tools for Claude Desktop / Cursor / any MCP host
+- 🗺️ [`mapko.net`](https://mapko.net) — community map & business pages ·
+  [`mapko.app`](https://mapko.app) — the CRM side
+
+`TypeScript` · `NestJS` · `LangGraph` · `Next.js` · `React 19` · `React Native` · `MongoDB` · `PostgreSQL + pgvector` · `Redis` · `Mistral` · `MCP` · `Docker` · `nginx`
+
+---
+
+#### 📚 [NACE-OSM Taxonomy](https://taxonomy.mapko.net) — a shared vocabulary for what a business *is*
+
+<p>
+  <a href="https://www.npmjs.com/package/@mapko/nace-osm-taxonomy"><img src="https://img.shields.io/npm/v/@mapko/nace-osm-taxonomy?style=flat-square&color=2dd4bf&label=npm" alt="npm version" /></a>
+  <img src="https://img.shields.io/badge/license-MIT-2dd4bf?style=flat-square" alt="MIT" />
+  <img src="https://img.shields.io/badge/JSON--LD-SKOS-0a1628?style=flat-square" alt="JSON-LD / SKOS" />
+  <img src="https://img.shields.io/badge/languages-EN%20%C2%B7%20UK%20%C2%B7%20DE%20%C2%B7%20RU-475569?style=flat-square" alt="4 languages" />
+</p>
+
+Every discovery platform reinvents its own category list, and no two of them
+agree — which is how *Friseursalon*, *hair salon* and `shop=hairdresser` end
+up as three unrelated strings in three systems that are describing the same
+shop. The classification layer under Mapko and Botkontor was pulled out into
+its own repo, licensed MIT and published as a standard, instead of staying a
+table in one company's database.
+
+**Anchored, not invented.** NACE Rev.2 (Eurostat) as the statistical
+backbone, OpenStreetMap tags as the community vocabulary, Schema.org
+`LocalBusiness` subtypes for markup, Wikidata QIDs as cross-lingual anchors.
+Nothing was copied from Google, Yelp or Foursquare — deliberately, because
+the point is that anyone can use this without asking permission from anyone.
+
+**Three levels, four languages.** 23 root categories → 353 subcategories →
+1,333 service templates, each with names and synonyms in EN / UK / DE / RU.
+Templates carry typed attributes (price, duration, enums), an OSM tag at the
+most specific level that actually applies, and trigger/anti-trigger hints an
+LLM classifier can use to tell a neighbouring service apart from the one it
+is looking at.
+
+**The URIs resolve.** It is real Linked Data: SKOS concepts in JSON-LD, one
+file per node, **1,711 dereferenceable `@id`s** under
+`taxonomy.mapko.net/v1/` served as `application/ld+json`, with a sitemap so
+crawlers can find them. Follow an `@id` and you get the node, not a 404.
+
+**It is Layer 0 of something bigger** — shared vocabulary on top, a public
+business graph in the middle, and per-tenant private memory underneath that
+never leaves its tenant. Mapko and Botkontor are the first consumers; the
+vocabulary is deliberately not theirs alone.
+
+- 📚 [`taxonomy.mapko.net`](https://taxonomy.mapko.net) — human-browsable and
+  machine-readable · [`context.jsonld`](https://taxonomy.mapko.net/v1/context.jsonld)
+  · [example node](https://taxonomy.mapko.net/v1/subcategory/hair-salon.jsonld)
+- 📦 [`@mapko/nace-osm-taxonomy`](https://www.npmjs.com/package/@mapko/nace-osm-taxonomy)
+  — npm, MIT, with TS helpers (`findByOsmTag`, `findByNaceRef`,
+  `findByWikidataId`)
+- 🐙 [`es-ua/nace-osm-taxonomy`](https://github.com/es-ua/nace-osm-taxonomy) —
+  category sources, changelog, [contributing](https://github.com/es-ua/nace-osm-taxonomy/blob/main/CONTRIBUTING.md)
+
+`JSON-LD` · `SKOS` · `NACE Rev.2` · `OpenStreetMap` · `Schema.org` · `Wikidata` · `TypeScript` · `Cloudflare Pages`
+
+---
+
 <table>
   <tr>
     <td width="50%">
@@ -167,14 +284,14 @@ against what the repo declares.
   </tr>
   <tr>
     <td width="50%">
-      <h3>🗺️ Mapko</h3>
-      <p>Location-based social platform with omnichannel CRM — map discovery, community chats, business listings with integrated customer management.</p>
-      <p><code>Next.js</code> <code>PostgreSQL</code> <code>WebSocket</code> <code>React Native</code></p>
-    </td>
-    <td width="50%">
       <h3>🔍 SERPOscan</h3>
       <p>AI-powered SEO audit tool — comprehensive technical analysis, performance scoring, and actionable recommendations.</p>
       <p><code>Node.js</code> <code>Lighthouse</code> <code>SEO</code></p>
+    </td>
+    <td width="50%">
+      <h3>🗺️ <a href="https://mapko.net">Mapko</a> &amp; <a href="https://botkontor.com">Botkontor</a></h3>
+      <p>Community map, business pages and the AI agent that answers on them — full write-up above ↑</p>
+      <p><code>NestJS</code> <code>LangGraph</code> <code>Next.js</code> <code>React Native</code></p>
     </td>
   </tr>
 </table>
