@@ -50,7 +50,11 @@ replacement app.
 
 ---
 
-#### ✈️ [Skydex](https://skydex.online) — a flight sim where the traffic is real
+<a href="https://skydex.online">
+  <img src="assets/skydex.png" alt="Skydex — skydex.online" width="460">
+</a>
+
+#### A flight sim where the traffic is real
 
 Open a browser tab and you are over the real Earth: real terrain, real
 photogrammetry where it exists, real weather for that city, real sunrise. The
