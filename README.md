@@ -8,7 +8,11 @@ Based in Hamburg, Germany 🇩🇪 — working with European startups and scale-
 
 ### 🚀 What I'm Building
 
-#### 🔴 [XENPAD](https://xenpads.com) — buttons you press, and that press back
+<a href="https://xenpads.com">
+  <img src="assets/xenpad.png" alt="XENPAD by ESSOTEC" width="460">
+</a>
+
+#### Buttons you press, and that press back
 
 Desk hardware that works in **both directions**. Pressing runs something on your
 computer; an event from the internet — a failed build, a page going down,
