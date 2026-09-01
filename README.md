@@ -8,6 +8,44 @@ Based in Hamburg, Germany 🇩🇪 — working with European startups and scale-
 
 ### 🚀 What I'm Building
 
+#### 🔴 [XENPAD](https://xenpads.com) — buttons you press, and that press back
+
+Desk hardware that works in **both directions**. Pressing runs something on your
+computer; an event from the internet — a failed build, a page going down,
+someone mentioning you — lights the device up. Two of them exist:
+
+**XENPAD One** — a single mechanical switch with a full-colour indicator, on an
+RP2040. Three gestures, each mapped independently, and a resting colour that
+tells you the state of whatever it is watching.
+
+**XENPAD Omni** — a round touchscreen on an ESP32-S3 with a rotary encoder and
+an RGB ring. Tiles, layers, and alerts that take over the whole glass with the
+actual message rather than a coloured dot. Press it and it opens the exact thing
+that raised the alert.
+
+The whole desk side is mine: firmware for both chips, a signed and notarized
+macOS app, and the relay that carries events from the internet to a device
+sitting behind someone's router.
+
+**The firmware for both is open source:**
+
+- [`xenpad-firmware`](https://github.com/xenpads/xenpad-firmware) — XENPAD One,
+  RP2040, GPLv3
+- [`xenpad-omni-firmware`](https://github.com/xenpads/xenpad-omni-firmware) —
+  XENPAD Omni, ESP32-S3, GPLv3
+- [`xenpad-app-releases`](https://github.com/xenpads/xenpad-app-releases) —
+  the desktop app, macOS, universal build
+
+The USB protocol is MIT in both, so anything can talk to the devices without
+inheriting copyleft. That split is deliberate: the shortcuts live in the
+device's own flash, so a button keeps working on a machine that has never seen
+my software — and if I stop, someone else can build the firmware and write a
+replacement app.
+
+`C` · `C++` · `RP2040` · `ESP32-S3` · `TinyUSB` · `LVGL` · `Electron` · `NestJS`
+
+---
+
 <table>
   <tr>
     <td width="50%">
